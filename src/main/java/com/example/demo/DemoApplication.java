@@ -17,7 +17,7 @@ public class DemoApplication {
 	@Bean
 	CommandLineRunner init(BoardGameRepo boardGameRepo){
 		return args -> {
-			Stream.of("Diuna","Pan Lodowego Ogrodu", "Wsiasc do pociagu").forEach(boardgamename -> {
+			Stream.of("Diuna","Pan Lodowego Ogrodu").forEach(boardgamename -> {
 				BoardGame boardGame = new BoardGame(boardgamename);
 				boardGameRepo.save(boardGame);
 			});
