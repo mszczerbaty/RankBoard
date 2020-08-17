@@ -12,23 +12,23 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "boardgames")
-public class BoardGame {
+@Table(name = "authors")
+public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String boardgamename;
+    private String authorname;
 
-    public BoardGame(String boardgamename) {
-        this.boardgamename = boardgamename;
+    public Author(String authorname) {
+        this.authorname = authorname;
     }
 
     @Override
     public String toString() {
-        return "BoardGame{" +
+        return "Author{" +
                 "id=" + id +
-                ", boardgamename='" + boardgamename + '\'' +
+                ", authorname='" + authorname + '\'' +
                 '}';
     }
 }
