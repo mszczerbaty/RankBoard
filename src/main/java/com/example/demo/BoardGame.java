@@ -17,11 +17,23 @@ public class BoardGame {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
     private String boardgamename;
+    private int publishyear;
+    private int estplaytime;
+    private int players;
+    private String description;
+    private int forage;
+    //private double score; avg from another table
+    //private long rank; to be determined
 
-    public BoardGame(String boardgamename) {
+    public BoardGame(String boardgamename, int publishyear, int estplaytime, int players, String description, int forage) {
         this.boardgamename = boardgamename;
+        this.publishyear = publishyear;
+        this.estplaytime = estplaytime;
+        this.players = players;
+        this.description = description;
+        this.forage = forage;
     }
 
     @Override
@@ -29,6 +41,11 @@ public class BoardGame {
         return "BoardGame{" +
                 "id=" + id +
                 ", boardgamename='" + boardgamename + '\'' +
+                ", publishyear=" + publishyear +
+                ", estplaytime=" + estplaytime +
+                ", players=" + players +
+                ", description='" + description + '\'' +
+                ", forage=" + forage +
                 '}';
     }
 }

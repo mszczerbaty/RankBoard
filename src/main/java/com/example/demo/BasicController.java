@@ -13,12 +13,10 @@ import java.util.Optional;
 public class BasicController {
 
     private final BoardGameRepo boardGameRepo;
-    private final AuthorRepo authorRepo;
 
     @Autowired
-    BasicController(BoardGameRepo boardGameRepo, AuthorRepo authorRepo) {
+    BasicController(BoardGameRepo boardGameRepo) {
         this.boardGameRepo = boardGameRepo;
-        this.authorRepo = authorRepo;
     }
 
     @GetMapping("/games")
@@ -27,12 +25,12 @@ public class BasicController {
     }
 
     @GetMapping("/games/{gameId}")
-    public Optional<BoardGame> getBoardGame(@PathVariable Long gameId) {
+    public Optional<BoardGame> getBoardGame(@PathVariable int gameId) {
         return boardGameRepo.findById(gameId);
     }
 
     @DeleteMapping("/games/{gameId}")
-    public void deleteGame(@PathVariable Long gameId){
+    public void deleteGame(@PathVariable int gameId){
         boardGameRepo.deleteById(gameId);
     }
 

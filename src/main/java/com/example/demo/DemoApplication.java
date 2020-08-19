@@ -16,7 +16,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	CommandLineRunner init(BoardGameRepo boardGameRepo){
 		return args -> {
 			Stream.of("Diuna","Pan Lodowego Ogrodu").forEach(boardgamename -> {
@@ -25,5 +25,5 @@ public class DemoApplication {
 			});
 			boardGameRepo.findAll().forEach(System.out::println);
 		};
-	}
+	}*/
 }
