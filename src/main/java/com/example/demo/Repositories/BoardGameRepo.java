@@ -1,6 +1,6 @@
-package com.example.demo;
+package com.example.demo.Repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.Entities.BoardGame;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

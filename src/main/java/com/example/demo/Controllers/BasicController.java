@@ -1,6 +1,11 @@
-package com.example.demo;
+package com.example.demo.Controllers;
 
-import net.bytebuddy.asm.Advice;
+import com.example.demo.Entities.Author;
+import com.example.demo.Entities.BoardGame;
+import com.example.demo.Entities.Extenstion;
+import com.example.demo.Repositories.AuthorRepo;
+import com.example.demo.Repositories.BoardGameRepo;
+import com.example.demo.Repositories.ExtenstionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +18,24 @@ import java.util.Optional;
 public class BasicController {
 
     private final BoardGameRepo boardGameRepo;
+    private final AuthorRepo authorRepo;
+    private final ExtenstionRepo extenstionRepo;
 
     @Autowired
-    BasicController(BoardGameRepo boardGameRepo) {
+    public BasicController(BoardGameRepo boardGameRepo, AuthorRepo authorRepo, ExtenstionRepo extenstionRepo) {
         this.boardGameRepo = boardGameRepo;
+        this.authorRepo = authorRepo;
+        this.extenstionRepo = extenstionRepo;
+    }
+
+    @GetMapping("/extensions")
+    public List<Extenstion> getExtenstions(){
+        return (List<Extenstion>) extenstionRepo.findAll();
+    }
+
+    @GetMapping("/authors")
+    public List<Author> getAuthors(){
+        return (List<Author>) authorRepo.findAll();
     }
 
     @GetMapping("/games")
@@ -37,6 +56,11 @@ public class BasicController {
     @PostMapping("/games")
     void addGame(@RequestBody BoardGame boardGame){
         boardGameRepo.save(boardGame);
+    }
+
+    @PostMapping("/authors")
+    void addAuthor(@RequestBody Author author){
+        authorRepo.save(author);
     }
 
     @PutMapping("/games")
