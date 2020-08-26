@@ -1,6 +1,7 @@
 package com.example.demo.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import liquibase.pro.packaged.J;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,8 +24,14 @@ public class Author {
     private String authorname;
     private String authorsurname;
     private String shortbio;
-    @JsonIgnore
-    @ManyToMany(mappedBy = "authors")
+
+    //@JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "boardgames_authors",
+            joinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "boardgame_id", referencedColumnName = "id")
+    )
     private List<BoardGame> boardgames;
 
     public Author(String authorname, String authorsurname, String shortbio) {

@@ -1,6 +1,6 @@
 package com.example.demo.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,31 +14,31 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "extensions")
-public class Extenstion {
+public class Extension {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String extenstionname;
+    private String extensionname;
     private String extdescription;
     private int extpublishyear;
 
-    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boardgame_id")
     private BoardGame boardgame;
 
-    public Extenstion(String extenstionname, String extdescription, int extpublishyear) {
-        this.extenstionname = extenstionname;
+    public Extension(String extensionname, String extdescription, int extpublishyear) {
+        this.extensionname = extensionname;
         this.extdescription = extdescription;
         this.extpublishyear = extpublishyear;
     }
 
     @Override
     public String toString() {
-        return "Extenstion{" +
+        return "Extension{" +
                 "id=" + id +
-                ", extenstionname='" + extenstionname + '\'' +
+                ", extensionname='" + extensionname + '\'' +
                 ", extdescription='" + extdescription + '\'' +
                 ", extpublishyear=" + extpublishyear +
                 '}';

@@ -26,19 +26,20 @@ public class BoardGame {
     private int players;
     private String description;
     private int forage;
+
     @JsonIgnore //it may change based on the way of adding new records
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "boardgames_authors",
-            joinColumns = @JoinColumn(name = "boardgame_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id")
-    )
+    @ManyToMany(mappedBy = "boardgames", cascade = CascadeType.ALL)
     private List<Author> authors;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "boardgame")
-    private List <Extenstion> extenstions;
+    @OneToMany(mappedBy = "boardgame", cascade = CascadeType.ALL)
+    private List <Extension> extensions;
+
     //private double score; avg from another table
+    @JsonIgnore
+    @OneToMany(mappedBy = "boardgame", cascade = CascadeType.ALL)
+    private List<Score> scores;
+
     //private long rank; to be determined
 
     public BoardGame(String boardgamename, int publishyear, int estplaytime, int players, String description, int forage) {
