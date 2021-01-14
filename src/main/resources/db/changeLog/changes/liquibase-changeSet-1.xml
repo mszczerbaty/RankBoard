@@ -1,29 +1,30 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
-    <changeSet author="Marcin (generated)" id="1598461824476-1">
+    <changeSet author="Marcin (generated)" id="1610483352840-1">
         <createTable tableName="authors">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="authorname" type="VARCHAR(255)"/>
             <column name="authorsurname" type="VARCHAR(255)"/>
-            <column name="shortbio" type="VARCHAR(255)"/>
+            <column name="shortbio" type="LONGTEXT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-2">
+    <changeSet author="Marcin (generated)" id="1610483352840-2">
         <createTable tableName="boardgames">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="boardgamename" type="VARCHAR(255)"/>
-            <column name="description" type="VARCHAR(255)"/>
+            <column name="description" type="LONGTEXT"/>
             <column name="estplaytime" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="forage" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="players" type="INT">
+            <column name="image_link" type="LONGTEXT"/>
+            <column name="players" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="publishyear" type="INT">
@@ -31,7 +32,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-3">
+    <changeSet author="Marcin (generated)" id="1610483352840-3">
         <createTable tableName="boardgames_authors">
             <column name="author_id" type="INT">
                 <constraints nullable="false"/>
@@ -41,12 +42,31 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-4">
+    <changeSet author="Marcin (generated)" id="1610483352840-4">
+        <createTable tableName="boardgames_categories">
+            <column name="category_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="boardgame_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Marcin (generated)" id="1610483352840-5">
+        <createTable tableName="categories">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="category" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Marcin (generated)" id="1610483352840-6">
         <createTable tableName="extensions">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="extdescription" type="VARCHAR(255)"/>
+            <column name="ext_image_link" type="LONGTEXT"/>
+            <column name="extdescription" type="LONGTEXT"/>
             <column name="extensionname" type="VARCHAR(255)"/>
             <column name="extpublishyear" type="INT">
                 <constraints nullable="false"/>
@@ -54,47 +74,90 @@
             <column name="boardgame_id" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-5">
+    <changeSet author="Marcin (generated)" id="1610483352840-7">
         <createTable tableName="scores">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
+            <column name="review" type="LONGTEXT"/>
             <column name="score" type="INT">
                 <constraints nullable="false"/>
             </column>
+            <column name="username" type="VARCHAR(255)"/>
             <column name="boardgame_id" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-6">
+    <changeSet author="Marcin (generated)" id="1610483352840-8">
+        <createTable tableName="user_roles">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="roles" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Marcin (generated)" id="1610483352840-9">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Marcin (generated)" id="1610483352840-10">
         <createIndex indexName="FK2x5b6hcvkiupsie43308uxi2x" tableName="scores">
             <column name="boardgame_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-7">
+    <changeSet author="Marcin (generated)" id="1610483352840-11">
+        <createIndex indexName="FK4lj6yi5ji86lh2fqabodmw2t5" tableName="boardgames_categories">
+            <column name="boardgame_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Marcin (generated)" id="1610483352840-12">
+        <createIndex indexName="FK9ullemypg5od1rffi5c00c6oo" tableName="boardgames_categories">
+            <column name="category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Marcin (generated)" id="1610483352840-13">
         <createIndex indexName="FKfuqct2bo7ca1s9tfp3jf4e1pr" tableName="extensions">
             <column name="boardgame_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-8">
+    <changeSet author="Marcin (generated)" id="1610483352840-14">
         <createIndex indexName="FKgar8jaxlra1l6l22pm72qcix0" tableName="boardgames_authors">
             <column name="author_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-9">
+    <changeSet author="Marcin (generated)" id="1610483352840-15">
+        <createIndex indexName="FKhfh9dx7w3ubf1co1vdev94g3f" tableName="user_roles">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Marcin (generated)" id="1610483352840-16">
         <createIndex indexName="FKhtj8uv983du6hejcir34hlcnm" tableName="boardgames_authors">
             <column name="boardgame_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-10">
+    <changeSet author="Marcin (generated)" id="1610483352840-17">
         <addForeignKeyConstraint baseColumnNames="boardgame_id" baseTableName="scores" constraintName="FK2x5b6hcvkiupsie43308uxi2x" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="boardgames" validate="true"/>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-11">
+    <changeSet author="Marcin (generated)" id="1610483352840-18">
+        <addForeignKeyConstraint baseColumnNames="boardgame_id" baseTableName="boardgames_categories" constraintName="FK4lj6yi5ji86lh2fqabodmw2t5" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="boardgames" validate="true"/>
+    </changeSet>
+    <changeSet author="Marcin (generated)" id="1610483352840-19">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="boardgames_categories" constraintName="FK9ullemypg5od1rffi5c00c6oo" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="categories" validate="true"/>
+    </changeSet>
+    <changeSet author="Marcin (generated)" id="1610483352840-20">
         <addForeignKeyConstraint baseColumnNames="boardgame_id" baseTableName="extensions" constraintName="FKfuqct2bo7ca1s9tfp3jf4e1pr" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="boardgames" validate="true"/>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-12">
+    <changeSet author="Marcin (generated)" id="1610483352840-21">
         <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="boardgames_authors" constraintName="FKgar8jaxlra1l6l22pm72qcix0" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="authors" validate="true"/>
     </changeSet>
-    <changeSet author="Marcin (generated)" id="1598461824476-13">
+    <changeSet author="Marcin (generated)" id="1610483352840-22">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_roles" constraintName="FKhfh9dx7w3ubf1co1vdev94g3f" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="Marcin (generated)" id="1610483352840-23">
         <addForeignKeyConstraint baseColumnNames="boardgame_id" baseTableName="boardgames_authors" constraintName="FKhtj8uv983du6hejcir34hlcnm" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="boardgames" validate="true"/>
     </changeSet>
 </databaseChangeLog>

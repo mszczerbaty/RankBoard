@@ -1,0 +1,24 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!-- authors -->
+    <changeSet author="Marcin" id="24">
+        <insert tableName="authors">
+            <column name="id" value="1"/>
+            <column name="authorname" value="David"/>
+            <column name="authorsurname" value="Turczi"/>
+            <column name="shortbio" value="David Turczi is a game designer from Hungary, living in Leiden, Netherlands (previously lived and worked in London, UK)."/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" value="2"/>
+            <column name="authorname" value="Jamey"/>
+            <column name="authorsurname" value="Stegmaier"/>
+            <column name="shortbio" value="Jamey has been designing board games his entire life, but in late 2011 he started developing his first published board game via Kickstarter, Viticulture: The Strategic Game of Winemaking."/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" value="3"/>
+            <column name="authorname" value=""/>
+            <column name="authorsurname" value=""/>
+            <column name="shortbio" value=""/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

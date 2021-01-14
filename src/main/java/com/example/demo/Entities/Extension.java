@@ -1,5 +1,6 @@
 package com.example.demo.Entities;
 
+import com.example.demo.Entities.BoardGame;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,19 +21,15 @@ public class Extension {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String extensionname;
+    @Lob
     private String extdescription;
     private int extpublishyear;
+    @Lob
+    private String extImageLink;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "boardgame_id")
     private BoardGame boardgame;
-
-    public Extension(String extensionname, String extdescription, int extpublishyear) {
-        this.extensionname = extensionname;
-        this.extdescription = extdescription;
-        this.extpublishyear = extpublishyear;
-    }
 
     @Override
     public String toString() {
@@ -41,6 +38,7 @@ public class Extension {
                 ", extensionname='" + extensionname + '\'' +
                 ", extdescription='" + extdescription + '\'' +
                 ", extpublishyear=" + extpublishyear +
+                ", extImageLink='" + extImageLink + '\'' +
                 '}';
     }
 }

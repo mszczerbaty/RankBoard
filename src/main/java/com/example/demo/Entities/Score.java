@@ -1,6 +1,6 @@
 package com.example.demo.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.demo.Entities.BoardGame;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,23 +19,21 @@ public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    //private int userId; //retrieve userid that scored a boardgame
+    private String username;
     private int score;
+    @Lob
+    private String review;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "boardgame_id")
     private BoardGame boardgame;
-
-    public Score(int score, BoardGame boardgame) {
-        this.score = score;
-        this.boardgame = boardgame;
-    }
 
     @Override
     public String toString() {
         return "Score{" +
                 "id=" + id +
                 ", score=" + score +
+                ", review='" + review + '\'' +
                 '}';
     }
 }

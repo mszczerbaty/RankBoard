@@ -1,11 +1,11 @@
 package com.example.demo.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,33 +23,28 @@ public class BoardGame {
     private String boardgamename;
     private int publishyear;
     private int estplaytime;
-    private int players;
+    private String players;
+    @Lob
     private String description;
     private int forage;
+    @Lob
+    private String imageLink;
 
-    @JsonIgnore //it may change based on the way of adding new records
+    @JsonIgnore
     @ManyToMany(mappedBy = "boardgames", cascade = CascadeType.ALL)
+    private List<Category> categories;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "boardgames", cascade = CascadeType.ALL) //cascade type will be changed
     private List<Author> authors;
 
     @JsonIgnore
     @OneToMany(mappedBy = "boardgame", cascade = CascadeType.ALL)
-    private List <Extension> extensions;
+    private List<Extension> extensions;
 
-    //private double score; avg from another table
     @JsonIgnore
     @OneToMany(mappedBy = "boardgame", cascade = CascadeType.ALL)
     private List<Score> scores;
-
-    //private long rank; to be determined
-
-    public BoardGame(String boardgamename, int publishyear, int estplaytime, int players, String description, int forage) {
-        this.boardgamename = boardgamename;
-        this.publishyear = publishyear;
-        this.estplaytime = estplaytime;
-        this.players = players;
-        this.description = description;
-        this.forage = forage;
-    }
 
     @Override
     public String toString() {
@@ -61,6 +56,7 @@ public class BoardGame {
                 ", players=" + players +
                 ", description='" + description + '\'' +
                 ", forage=" + forage +
+                ", imageLink='" + imageLink + '\'' +
                 '}';
     }
 }

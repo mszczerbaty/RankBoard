@@ -1,0 +1,42 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!-- categories -->
+    <changeSet author="Marcin" id="27">
+        <insert tableName="extensions">
+            <column name="id" value="1"/>
+            <column name="extensionname" value="Scythe: The Rise of Fenris"/>
+            <column name="extdescription" value="Scythe: The Rise of Fenris, the conclusion to the Scythe expansion trilogy, enables two different options for any player count (1-5 if you have Scythe; 1-7 players if you have Invaders from Afar):
+Campaign (8 games): The story of Scythe continues and concludes with an eight-episode campaign. While the campaign includes surprises, unlocks, and persistent elements, it is fully resettable and replayable.
+Modular (11 modules): Instead of—or after—the campaign, the new modules in The Rise of Fenris can be used in various combinations to cater to player preferences. These modules are compatible with all Scythe expansions, and they include a fully cooperative module."/>
+            <column name="extpublishyear" value="2018"/>
+            <column name="ext_image_link" value="https://cf.geekdo-images.com/GRp__UYY-wM-i2fg4Qzefw__itemrep/img/751r3zULyEbgtseuJu8ONu8gMeo=/fit-in/246x300/filters:strip_icc()/pic3911078.jpg"/>
+            <column name="boardgame_id" value="2"/>
+        </insert>
+        <insert tableName="extensions">
+            <column name="id" value="2"/>
+            <column name="extensionname" value="Scythe: Modular Board"/>
+            <column name="extdescription" value="The Scythe: Modular Board expansion allows you to change the landscape of Eastern Europa every time you play Scythe thanks to its double-sided game board and four large double-sided landscape tiles. Faction locations, i.e., the home base tiles, change each time you play."/>
+            <column name="extpublishyear" value="2019"/>
+            <column name="ext_image_link" value="https://cf.geekdo-images.com/0nIxWul4CRnlENf-lbx9bg__itemrep/img/kenGf55VRWCR_13M8VnA5ngkXjw=/fit-in/246x300/filters:strip_icc()/pic4720430.png"/>
+            <column name="boardgame_id" value="2"/>
+        </insert>
+        <insert tableName="extensions">
+            <column name="id" value="3"/>
+            <column name="extensionname" value="Scythe: The Wind Gambit"/>
+            <column name="extdescription" value="Scythe: The Wind Gambit, an expansion for Scythe, adds two new modules that can be played together or separately at any player count and with either the base game on its own or with other Scythe expansions:
+• Airships: (1 miniature per faction; 16 tiles) An airship is a new type of unit that is distinctly different from characters, mechs, and workers. Unlike those units, airships never control territories. Airships are moved via a Move action, and rivers and lakes do not constrain their movement. Each airship has two randomly combined abilities (1 aggressive and 1 passive ability; same combo for all players).
+• Resolutions: (8 tiles) The resolution module changes the way a game of Scythe ends. If you play with this module, ignore the standard end-game trigger (when a player places their sixth star, everything stops and the game ends). Instead, the resolution tile for the current game will determine when and how the game ends."/>
+            <column name="extpublishyear" value="2017"/>
+            <column name="ext_image_link" value="https://cf.geekdo-images.com/kcp2L5EPPr-okBb1jCtxpA__itemrep/img/dMRMgc9tJiMLuMVl2VeBhUBOXVE=/fit-in/246x300/filters:strip_icc()/pic3487272.jpg"/>
+            <column name="boardgame_id" value="2"/>
+        </insert>
+        <insert tableName="extensions">
+            <column name="id" value="4"/>
+            <column name="extensionname" value="Anachrony: Fractures of Time"/>
+            <column name="extdescription" value="In the alternate storyline of Fractures of Time, Anachrony’s first major expansion, the four original Paths and the newly formed, sanguine Path of Unity have gained access to a powerful new technology called Flux. Flux Cores can be acquired in the Amethynia Valley, the expansion’s new main zone. By using the Flux Cores to power up their Fracture device, players may move (“Blink”) one of their already placed Exosuits to a new action space instead of placing a new one, or immediately retrieve some of their Workers or Free Action markers. This can result in never-before-seen action efficiency, but just like the Time Rifts, the Flux technology is a double-edged sword. Without a sufficiently advanced Fracture device, overusing it can cause Temporal Glitches; hectic negative effects such as shutting down the Exosuit bay slots, temporarily disabling buildings, or making players more prone to Anomalies."/>
+            <column name="extpublishyear" value="2020"/>
+            <column name="ext_image_link" value="https://cf.geekdo-images.com/coeTqbybidQJlx8Xwp_tHA__itemrep/img/scN4nTVw9d4QGZcBWXIEJub_NSk=/fit-in/246x300/filters:strip_icc()/pic4924713.jpg"/>
+            <column name="boardgame_id" value="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

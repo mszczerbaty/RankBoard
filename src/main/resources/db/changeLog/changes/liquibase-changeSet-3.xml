@@ -1,0 +1,37 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <!-- boardgames -->
+    <changeSet author="Marcin" id="25">
+        <insert tableName="boardgames">
+            <column name="id" value="1"/>
+            <column name="boardgamename" value="Anachrony"/>
+            <column name="publishyear" value="2017"/>
+            <column name="estplaytime" value="120"/>
+            <column name="players" value="1-4"/>
+            <column name="description" value="Anachrony features a unique two-tiered worker placement system. To travel to the Capital or venture out to the devastated areas for resources, players need not only various specialists (Engineers, Scientists, Administrators, and Geniuses) but also Exosuits to protect and enhance them — and both are in short supply."/>
+            <column name="forage" value="15"/>
+            <column name="image_link" value="https://cf.geekdo-images.com/31quLNzteInnevVRAABoow__opengraph/img/AsD3KAqfv47PSGW8YYCkz4peisM=/fit-in/1200x630/filters:strip_icc()/pic3499707.jpg"/>
+        </insert>
+        <insert tableName="boardgames">
+            <column name="id" value="2"/>
+            <column name="boardgamename" value="Scythe"/>
+            <column name="publishyear" value="2016"/>
+            <column name="estplaytime" value="90"/>
+            <column name="players" value="1-5"/>
+            <column name="description" value="Scythe is an engine-building game set in an alternate-history 1920s period. It is a time of farming and war, broken hearts and rusted gears, innovation and valor. In Scythe, each player represents a character from one of five factions of Eastern Europe who are attempting to earn their fortune and claim their faction's stake in the land around the mysterious Factory. Players conquer territory, enlist new recruits, reap resources, gain villagers, build structures, and activate monstrous mechs."/>
+            <column name="forage" value="14"/>
+            <column name="image_link" value="https://ocdn.eu/pulscms-transforms/1/47UktkqTURBXy82MTM0MGE0Y2RiMGYyMzEyZDZiZTk2ZTgzZDYwN2I2NC5qcGVnkZUDAADNAoDNAWg"/>
+        </insert>
+        <insert tableName="boardgames">
+            <column name="id" value="3"/>
+            <column name="boardgamename" value="Tapestry"/>
+            <column name="publishyear" value="2019"/>
+            <column name="estplaytime" value="90"/>
+            <column name="players" value="1-5"/>
+            <column name="description" value="In Tapestry, you start from nothing and advance on any of the four advancement tracks (science, technology, exploration, and military) to earn progressively better benefits. You can focus on a specific track or take a more balanced approach. You will also improve your income, build your capital city, leverage your asymmetric abilities, earn victory points, and gain tapestry cards that will tell the story of your civilization."/>
+            <column name="forage" value="12"/>
+            <column name="image_link" value="https://cf.geekdo-images.com/7kqDmkUMGxXHr1wNPA7Gvg__itemrep/img/I1vufBbdFIUTfH1tmcfbeusXI8s=/fit-in/246x300/filters:strip_icc()/pic4884996.jpg"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

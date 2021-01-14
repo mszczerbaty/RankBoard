@@ -4,5 +4,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
 http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-    <include file="changes/liquibase-changeLog-0.0.4.xml" relativeToChangelogFile="true" />
+    <include file="changes/liquibase-changeSet-1.xml" relativeToChangelogFile="true" />
+    <include file="changes/liquibase-changeSet-2.xml" relativeToChangelogFile="true" />
+    <include file="changes/liquibase-changeSet-3.xml" relativeToChangelogFile="true" />
+    <include file="changes/liquibase-changeSet-4.xml" relativeToChangelogFile="true" />
+    <include file="changes/liquibase-changeSet-5.xml" relativeToChangelogFile="true" />
+    <include file="changes/liquibase-changeSet-6.xml" relativeToChangelogFile="true" />
+    <include file="changes/liquibase-changeSet-7.xml" relativeToChangelogFile="true" />
+    <!--<include file="changes/liquibase-changeSet-8.xml" relativeToChangelogFile="true" />-->
 </databaseChangeLog>
