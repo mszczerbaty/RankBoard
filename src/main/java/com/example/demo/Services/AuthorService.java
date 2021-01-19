@@ -13,14 +13,19 @@ import java.util.Optional;
 @Service
 public class AuthorService {
 
-    AuthorRepo authorRepo;
+    private AuthorRepo authorRepo;
 
     public AuthorService(AuthorRepo authorRepo) {
         this.authorRepo = authorRepo;
     }
 
-    public void save(@RequestBody Author author){
-        authorRepo.save(author);
+    public boolean save(@RequestBody Author author) {
+        if (authorRepo.isAuthorAdded(author.getAuthorname(), author.getAuthorsurname())) {
+            return false;
+        } else {
+            authorRepo.save(author);
+            return true;
+        }
     }
 
     public List<Author> findAll() {
@@ -31,15 +36,11 @@ public class AuthorService {
         return authorRepo.findById(authorId);
     }
 
-    public Author update(@RequestBody Author author){
-        return authorRepo.save(author);
-    }
-
-    public void delete(@PathVariable int authorId){
+    public void delete(@PathVariable int authorId) {
         authorRepo.deleteById(authorId);
     }
 
     public List<Author> findByGameId(@PathVariable int gameId) {
-        return  authorRepo.findByGameId(gameId);
+        return authorRepo.findByGameId(gameId);
     }
 }
