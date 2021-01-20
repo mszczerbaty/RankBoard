@@ -18,48 +18,54 @@ import java.util.Optional;
 @RequestMapping("/boardgames")
 public class BoardGameController {
 
-    BoardGameService boardGameService;
-    BoardGameMapper boardGameMapper;
+    private BoardGameService boardGameService;
+    private BoardGameMapper boardGameMapper;
 
     public BoardGameController(BoardGameService boardGameService, BoardGameMapper boardGameMapper) {
         this.boardGameService = boardGameService;
         this.boardGameMapper = boardGameMapper;
     }
 
-    @PostMapping()
-    ResponseEntity<BoardGameDTO> addBoardGame(@RequestBody BoardGameDTO boardGameDTO){
-        //dodac authors, categories, extensions
-        boardGameService.save(boardGameMapper.toBoardGame(boardGameDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(boardGameDTO);
-    }
-
     @GetMapping()
-    public ResponseEntity<List<BoardGameDTO>> getBoardGames(){
+    public ResponseEntity<List<BoardGameDTO>> getBoardGames() {
         return ResponseEntity.ok(boardGameMapper.toBoardGameDTOs(boardGameService.findAll()));
     }
 
     @GetMapping("/{boardGameId}")
-    ResponseEntity<BoardGameDTO> getBoardGame(@PathVariable Integer boardGameId){
+    ResponseEntity<BoardGameDTO> getBoardGame(@PathVariable Integer boardGameId) {
         Optional<BoardGame> boardGame = boardGameService.findById(boardGameId);
-        return ResponseEntity.ok(boardGameMapper.toBoardGameDTO(boardGame.get()));
-    }
-
-    @PutMapping("/{boardGameId}")
-    ResponseEntity<BoardGameDTO> updateBoardGame(@PathVariable Integer boardGameId, @RequestBody BoardGameDTO boardGameDTO){
-        BoardGame boardGame = boardGameMapper.toBoardGame(boardGameDTO);
-        boardGame.setId(boardGameId);
-        boardGameService.update(boardGame);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(boardGameDTO);
-    }
-
-    @DeleteMapping("/{boardGameId}")
-    ResponseEntity deleteBoardGame(@PathVariable Integer boardGameId){
-        boardGameService.delete(boardGameId);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+        return boardGame.map(boardGame1 ->
+                ResponseEntity.status(HttpStatus.OK).body(boardGameMapper.toBoardGameDTO(boardGame1)))
+                .orElseGet(() ->
+                        ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
     @GetMapping("/author/{authorId}")
-    public ResponseEntity<List<BoardGameDTO>> getBoardgamesByAuthorId(@PathVariable int authorId){
+    public ResponseEntity<List<BoardGameDTO>> getBoardgamesByAuthorId(@PathVariable int authorId) {
         return ResponseEntity.ok(boardGameMapper.toBoardGameDTOs(boardGameService.findByAuthorId(authorId)));
+    }
+
+    @PostMapping()
+    ResponseEntity<BoardGameDTO> addBoardGame(@RequestBody BoardGameDTO boardGameDTO) {
+        if (boardGameService.save(boardGameMapper.toBoardGame(boardGameDTO))) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(boardGameDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(boardGameDTO);
+        }
+    }
+
+    @PutMapping("/{boardGameId}")
+    ResponseEntity<BoardGameDTO> updateBoardGame(@PathVariable Integer boardGameId, @RequestBody BoardGameDTO boardGameDTO) {
+        if (boardGameService.findById(boardGameId).isPresent() && boardGameService.save(boardGameMapper.toBoardGame(boardGameDTO))) {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(boardGameDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(boardGameDTO);
+        }
+    }
+
+    @DeleteMapping("/{boardGameId}")
+    ResponseEntity deleteBoardGame(@PathVariable Integer boardGameId) {
+        boardGameService.delete(boardGameId);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 }

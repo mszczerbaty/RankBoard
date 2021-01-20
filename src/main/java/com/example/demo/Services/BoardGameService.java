@@ -13,14 +13,19 @@ import java.util.Optional;
 @Service
 public class BoardGameService {
 
-    BoardGameRepo boardGameRepo;
+    private BoardGameRepo boardGameRepo;
 
     public BoardGameService(BoardGameRepo boardGameRepo) {
         this.boardGameRepo = boardGameRepo;
     }
 
-    public void save(@RequestBody BoardGame boardGame){
-        boardGameRepo.save(boardGame);
+    public boolean save(@RequestBody BoardGame boardGame) {
+        if (boardGameRepo.isBoardgameAdded(boardGame.getBoardgamename())) {
+            return false;
+        } else {
+            boardGameRepo.save(boardGame);
+            return true;
+        }
     }
 
     public List<BoardGame> findAll() {
@@ -31,15 +36,11 @@ public class BoardGameService {
         return boardGameRepo.findById(gameId);
     }
 
-    public BoardGame update(@RequestBody BoardGame boardGame){
-        return boardGameRepo.save(boardGame);
-    }
-
-    public void delete(@PathVariable int gameId){
+    public void delete(@PathVariable int gameId) {
         boardGameRepo.deleteById(gameId);
     }
 
     public List<BoardGame> findByAuthorId(@PathVariable int authorId) {
-        return  boardGameRepo.findByAuthorId(authorId);
+        return boardGameRepo.findByAuthorId(authorId);
     }
 }

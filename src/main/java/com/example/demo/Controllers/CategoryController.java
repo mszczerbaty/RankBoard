@@ -36,11 +36,11 @@ public class CategoryController {
         return ResponseEntity.ok(categoryMapper.toCategoryDTOs(categoryService.findAll()));
     }
 
-    @PutMapping("/{categoryId}") //creates connection
+    @PutMapping("/{categoryId}")
     ResponseEntity<CategoryDTO> updateCategory(@PathVariable int categoryId, @RequestBody CategoryDTO categoryDTO){
         Category category = categoryMapper.toCategory(categoryDTO);
         category.setId(categoryId);
-        categoryService.save(category); //#2
+        categoryService.save(category);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(categoryDTO);
     }
 

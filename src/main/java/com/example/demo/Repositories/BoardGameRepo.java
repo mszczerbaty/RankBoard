@@ -12,5 +12,8 @@ import java.util.List;
 public interface BoardGameRepo extends CrudRepository<BoardGame, Integer> {
 
     @Query("SELECT b FROM BoardGame b join b.authors ba WHERE ba.id=:authorId")
-    List<BoardGame> findByAuthorId(@Param("authorId")int authorId);
+    List<BoardGame> findByAuthorId(@Param("authorId") int authorId);
+
+    @Query("SELECT CASE WHEN COUNT(*) > 0 THEN TRUE ELSE FALSE END FROM BoardGame b WHERE b.boardgamename=:boardgamename")
+    boolean isBoardgameAdded(@Param("boardgamename") String boardgamename);
 }
