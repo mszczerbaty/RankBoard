@@ -18,8 +18,8 @@ import java.util.Optional;
 @RequestMapping("/scores")
 public class ScoreController {
 
-    ScoreService scoreService;
-    ScoreMapper scoreMapper;
+    private ScoreService scoreService;
+    private ScoreMapper scoreMapper;
 
     public ScoreController(ScoreService scoreService, ScoreMapper scoreMapper) {
         this.scoreService = scoreService;
@@ -27,47 +27,57 @@ public class ScoreController {
     }
 
     @GetMapping("/game/{gameId}")
-    public ResponseEntity<List<ScoreDTO>> getScoresByGameId(@PathVariable Integer gameId){
+    public ResponseEntity<List<ScoreDTO>> getScoresByGameId(@PathVariable Integer gameId) {
         return ResponseEntity.ok(scoreMapper.toScoreDTOs(scoreService.getScoresByGameId(gameId)));
     }
 
     @GetMapping("/topAverage")
-    public ResponseEntity<List<ScoreAvgDTO>> getAveargeScore(){
-            return ResponseEntity.ok(scoreService.topAverageScores());
+    public ResponseEntity<List<ScoreAvgDTO>> getAveargeScore() {
+        return ResponseEntity.ok(scoreService.topAverageScores());
     }
 
     @GetMapping("/count")
-    public ResponseEntity<List<ScoreCountDTO>> getCountScores(){
+    public ResponseEntity<List<ScoreCountDTO>> getCountScores() {
         return ResponseEntity.ok(scoreService.countScores());
     }
 
-    @PostMapping("")
-    ResponseEntity<ScoreDTO> addScore(@RequestBody ScoreDTO scoreDTO){
-        scoreService.save(scoreMapper.toScore(scoreDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(scoreDTO);
-    }
-
-    @GetMapping("")
-    public ResponseEntity<List<ScoreDTO>> getScores(){
+    @GetMapping()
+    public ResponseEntity<List<ScoreDTO>> getScores() {
         return ResponseEntity.ok(scoreMapper.toScoreDTOs(scoreService.findAll()));
     }
 
     @GetMapping("/{scoreId}")
-    ResponseEntity<ScoreDTO> getScore(@PathVariable Integer scoreId){
+    ResponseEntity<ScoreDTO> getScore(@PathVariable Integer scoreId) {
         Optional<Score> score = scoreService.findById(scoreId);
-        return ResponseEntity.ok(scoreMapper.toScoreDTO(score.get()));
+
+        return score.map(score1 ->
+                ResponseEntity.status(HttpStatus.OK).body(scoreMapper.toScoreDTO(score1)))
+                .orElseGet(() ->
+                        ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
-    @PutMapping("/{scoreId}") //creates connection between boardgame and author
-    ResponseEntity<ScoreDTO> updateScore(@PathVariable Integer scoreId, @RequestBody ScoreDTO scoreDTO){
-        Score score = scoreMapper.toScore(scoreDTO);
-        score.setId(scoreId);
-        scoreService.update(score);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(scoreDTO);
+    @PostMapping()
+    ResponseEntity<ScoreDTO> addScore(@RequestBody ScoreDTO scoreDTO) {
+        if (scoreService.save(scoreMapper.toScore(scoreDTO))) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(scoreDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(scoreDTO);
+        }
+    }
+
+    //not used
+    @PutMapping("/{scoreId}")
+    ResponseEntity<ScoreDTO> updateScore(@PathVariable Integer scoreId, @RequestBody ScoreDTO scoreDTO) {
+        if (scoreService.findById(scoreId).isPresent()) {
+            scoreService.save(scoreMapper.toScore(scoreDTO));
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(scoreDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(scoreDTO);
+        }
     }
 
     @DeleteMapping("/{scoreId}")
-    ResponseEntity deleteScore(@PathVariable Integer scoreId){
+    ResponseEntity deleteScore(@PathVariable Integer scoreId) {
         scoreService.delete(scoreId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }

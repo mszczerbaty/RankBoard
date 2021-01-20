@@ -24,29 +24,32 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @GetMapping()
+    public ResponseEntity<List<CategoryDTO>> getCategories() {
+        return ResponseEntity.ok(categoryMapper.toCategoryDTOs(categoryService.findAll()));
+    }
+
+    @GetMapping("/game/{gameId}")
+    public ResponseEntity<List<CategoryDTO>> getCategoriesByGame(@PathVariable int gameId) {
+        return ResponseEntity.ok(categoryMapper.toCategoryDTOs(categoryService.findByGameId(gameId)));
+    }
+
     @PostMapping()
-    ResponseEntity<CategoryDTO> addCategory(@RequestBody CategoryDTO categoryDTO){
+    ResponseEntity<CategoryDTO> addCategory(@RequestBody CategoryDTO categoryDTO) {
         Category category = categoryMapper.toCategory(categoryDTO);
         categoryService.save(category);
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryDTO);
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<CategoryDTO>> getCategories(){
-        return ResponseEntity.ok(categoryMapper.toCategoryDTOs(categoryService.findAll()));
-    }
-
     @PutMapping("/{categoryId}")
-    ResponseEntity<CategoryDTO> updateCategory(@PathVariable int categoryId, @RequestBody CategoryDTO categoryDTO){
-        Category category = categoryMapper.toCategory(categoryDTO);
-        category.setId(categoryId);
-        categoryService.save(category);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(categoryDTO);
+    ResponseEntity<CategoryDTO> updateCategory(@PathVariable int categoryId, @RequestBody CategoryDTO categoryDTO) {
+        if (categoryService.save(categoryMapper.toCategory(categoryDTO))) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(categoryDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(categoryDTO);
+        }
     }
 
-    @GetMapping("/game/{gameId}")
-    public ResponseEntity<List<CategoryDTO>> getCategoriesByGame(@PathVariable int gameId){
-        return ResponseEntity.ok(categoryMapper.toCategoryDTOs(categoryService.findByGameId(gameId)));
-    }
+
 
 }

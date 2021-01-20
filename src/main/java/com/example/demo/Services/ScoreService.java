@@ -15,24 +15,24 @@ import java.util.Optional;
 @Service
 public class ScoreService {
 
-    ScoreRepo scoreRepo;
+    private ScoreRepo scoreRepo;
 
     public ScoreService(ScoreRepo scoreRepo) {
         this.scoreRepo = scoreRepo;
     }
 
-    public void save(@RequestBody Score score){
+    public boolean save(@RequestBody Score score) {
         //check if user already added review
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = ((UserDetails)principal).getUsername();
+        String username = ((UserDetails) principal).getUsername();
 
-        if(scoreRepo.findScoreByUsername(score.getBoardgame().getId(), username)){
-            System.out.println("User " + username + " already added review");
+        if (scoreRepo.findScoreByUsername(score.getBoardgame().getId(), username)) {
+            return false;
         } else {
             score.setUsername(username);
-            System.out.println(username);
+            System.out.println(username);//
             scoreRepo.save(score);
+            return true;
         }
     }
 
@@ -44,11 +44,7 @@ public class ScoreService {
         return scoreRepo.findById(scoreId);
     }
 
-    public void update(@RequestBody Score score){
-        scoreRepo.save(score);
-    }
-
-    public void delete(@PathVariable int scoreId){
+    public void delete(@PathVariable int scoreId) {
         scoreRepo.deleteById(scoreId);
     }
 
@@ -56,10 +52,11 @@ public class ScoreService {
         return scoreRepo.getTopAverageScores();
     }
 
-    public List<Score> getScoresByGameId(@PathVariable int gameId){
+    public List<Score> getScoresByGameId(@PathVariable int gameId) {
         return scoreRepo.getScoresByGameId(gameId);
     }
 
-    public List<ScoreCountDTO> countScores() { return scoreRepo.countScores();
+    public List<ScoreCountDTO> countScores() {
+        return scoreRepo.countScores();
     }
 }

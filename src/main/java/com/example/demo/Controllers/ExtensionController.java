@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequestMapping("/extensions")
 public class ExtensionController {
 
-    private final ExtensionService extensionService;
+    private ExtensionService extensionService;
     private ExtensionMapper extensionMapper;
 
     public ExtensionController(ExtensionService extensionService, ExtensionMapper extensionMapper) {
@@ -25,39 +25,43 @@ public class ExtensionController {
     }
 
     //Extension
-    @PostMapping()
-    ResponseEntity<ExtensionDTO> addExtension(@RequestBody ExtensionDTO extensionDTO){
-        extensionService.save(extensionMapper.toExtenstion(extensionDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(extensionDTO);
-    }
-
     @GetMapping()
-    public ResponseEntity<List<ExtensionDTO>> getExtensions(){
+    public ResponseEntity<List<ExtensionDTO>> getExtensions() {
         return ResponseEntity.ok(extensionMapper.toExtensionDTOs(extensionService.findAll()));
     }
 
     @GetMapping("/game/{gameId}")
-    public ResponseEntity<List<ExtensionDTO>> getExtensionsByGameId(@PathVariable int gameId){
+    public ResponseEntity<List<ExtensionDTO>> getExtensionsByGameId(@PathVariable int gameId) {
         return ResponseEntity.ok(extensionMapper.toExtensionDTOs(extensionService.findByGameId(gameId)));
     }
 
     @GetMapping("/{extensionId}")
     ResponseEntity<ExtensionDTO> getExtension(@PathVariable int extensionId) {
         Optional<Extension> extension = extensionService.findById(extensionId);
-        return ResponseEntity.ok(extensionMapper.toExtensionDTO(extension.get()));
+        return extension.map(extension1 ->
+                ResponseEntity.status(HttpStatus.OK).body(extensionMapper.toExtensionDTO(extension1)))
+                .orElseGet(() ->
+                        ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+    }
+
+    @PostMapping()
+    ResponseEntity<ExtensionDTO> addExtension(@RequestBody ExtensionDTO extensionDTO) {
+        extensionService.save(extensionMapper.toExtenstion(extensionDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(extensionDTO);
     }
 
     @PutMapping("/{extensionId}")
-    ResponseEntity<ExtensionDTO> updateExtension(@PathVariable int extensionId, @RequestBody ExtensionDTO extensionDTO){
-        Extension extension = extensionMapper.toExtenstion(extensionDTO);
-        extension.setId(extensionId);
-        //extension.setBoardgame(extensionDTO.getBoardgame()); tak chyba powinno byc
-        extensionService.update(extension);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(extensionDTO);
+    ResponseEntity<ExtensionDTO> updateExtension(@PathVariable int extensionId, @RequestBody ExtensionDTO extensionDTO) {
+        if (extensionService.findById(extensionId).isPresent()) {
+            extensionService.save(extensionMapper.toExtenstion(extensionDTO));
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(extensionDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(extensionDTO);
+        }
     }
 
     @DeleteMapping("/{extensionId}")
-    ResponseEntity deleteExtension(@PathVariable int extensionId){
+    ResponseEntity deleteExtension(@PathVariable int extensionId) {
         extensionService.delete(extensionId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }

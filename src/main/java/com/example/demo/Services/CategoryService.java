@@ -11,18 +11,19 @@ import java.util.List;
 @Service
 public class CategoryService {
 
-    CategoryRepo categoryRepo;
+    private CategoryRepo categoryRepo;
 
     public CategoryService(CategoryRepo categoryRepo) {
         this.categoryRepo = categoryRepo;
     }
 
-    public void update(@RequestBody Category category){
-        categoryRepo.save(category);
-    }
-
-    public void save(@RequestBody Category category){
-        categoryRepo.save(category);
+    public boolean save(@RequestBody Category category) {
+        if (categoryRepo.isCategoryAdded(category.getCategory())) {
+            return false;
+        } else {
+            categoryRepo.save(category);
+            return true;
+        }
     }
 
     public List<Category> findAll() {
@@ -30,6 +31,6 @@ public class CategoryService {
     }
 
     public List<Category> findByGameId(@PathVariable int gameId) {
-        return  categoryRepo.findByGameId(gameId);
+        return categoryRepo.findByGameId(gameId);
     }
 }
