@@ -26,5 +26,9 @@
             <column name="id" value="6"/>
             <column name="category" value="Dice Rolling"/>
         </insert>
+        <insert tableName="categories">
+            <column name="id" value="7"/>
+            <column name="category" value="Action Drafting"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

@@ -30,7 +30,6 @@ public class ScoreService {
             return false;
         } else {
             score.setUsername(username);
-            System.out.println(username);//
             scoreRepo.save(score);
             return true;
         }

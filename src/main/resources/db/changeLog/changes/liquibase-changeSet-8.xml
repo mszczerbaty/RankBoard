@@ -1,4 +1,55 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
     <!--  -->
+    <changeSet author="Marcin" id="30">
+        <insert tableName="scores">
+            <column name="id" value="1"/>
+            <column name="username" value="Andy"/>
+            <column name="score" value="7"/>
+            <column name="review" value="Great game!"/>
+            <column name="boardgame_id" value="1"/>
+        </insert>
+        <insert tableName="scores">
+            <column name="id" value="2"/>
+            <column name="username" value="Jacob"/>
+            <column name="score" value="8"/>
+            <column name="review" value="Awesome design."/>
+            <column name="boardgame_id" value="2"/>
+        </insert>
+        <insert tableName="scores">
+            <column name="id" value="3"/>
+            <column name="username" value="Amanda"/>
+            <column name="score" value="10"/>
+            <column name="review" value="Best game of the year."/>
+            <column name="boardgame_id" value="3"/>
+        </insert>
+        <insert tableName="scores">
+            <column name="id" value="4"/>
+            <column name="username" value="Sofia"/>
+            <column name="score" value="10"/>
+            <column name="review" value="Easy to learn, hard to master!"/>
+            <column name="boardgame_id" value="4"/>
+        </insert>
+        <insert tableName="scores">
+            <column name="id" value="5"/>
+            <column name="username" value="Toby"/>
+            <column name="score" value="4"/>
+            <column name="review" value="Enjoyable, but too long"/>
+            <column name="boardgame_id" value="5"/>
+        </insert>
+        <insert tableName="scores">
+            <column name="id" value="6"/>
+            <column name="username" value="Toby"/>
+            <column name="score" value="10"/>
+            <column name="review" value=""/>
+            <column name="boardgame_id" value="1"/>
+        </insert>
+        <insert tableName="scores">
+            <column name="id" value="7"/>
+            <column name="username" value="Sofia"/>
+            <column name="score" value="8"/>
+            <column name="review" value=""/>
+            <column name="boardgame_id" value="2"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

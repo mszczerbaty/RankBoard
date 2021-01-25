@@ -25,9 +25,9 @@ import static com.example.demo.Entities.Role.ROLE_USER;
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
+
     private UserRepo userRepo;
-    @Autowired
+
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -35,10 +35,8 @@ public class UserService implements UserDetailsService {
         System.out.println(s);
         Optional<User> username = userRepo.findByUsername(s);
         if (username.isPresent()){
-            System.out.println("znelziono " + username);
             return username.get();
         } else {
-            System.out.println(username + "not found");
             throw new UsernameNotFoundException(String.format("Username " + s + " not found"));
         }
     }
@@ -50,13 +48,10 @@ public class UserService implements UserDetailsService {
 
         if((SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")))){//ROLE_ADMIN OR ADMIN?
             user.setRoles(Arrays.asList(ROLE_ADMIN, ROLE_USER));
-            System.out.println("NOWY ADMIN");
         } else {
             user.setRoles(Arrays.asList(Role.ROLE_USER));
-            System.out.println("NOWY USER");
         }
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
-        System.out.println("probuje zarejestrowac " + user.getUsername() + " " + user.getPassword());//
         userRepo.save(user);
     }
 }

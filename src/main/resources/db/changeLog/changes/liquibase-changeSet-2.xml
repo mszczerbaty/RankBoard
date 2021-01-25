@@ -16,9 +16,15 @@
         </insert>
         <insert tableName="authors">
             <column name="id" value="3"/>
-            <column name="authorname" value=""/>
-            <column name="authorsurname" value=""/>
-            <column name="shortbio" value=""/>
+            <column name="authorname" value="Jacob"/>
+            <column name="authorsurname" value="Fryxelius"/>
+            <column name="shortbio" value="Game developer from Sweden. Co-owner of FryxGames trade company."/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" value="4"/>
+            <column name="authorname" value="Isaac"/>
+            <column name="authorsurname" value="Fryxelius"/>
+            <column name="shortbio" value="Helping his brothers out creating beautiful artwork for their games. With his help, FryxGames has published Terraforming Mars, Wilderness and Brawling Barons."/>
         </insert>
     </changeSet>
 </databaseChangeLog>

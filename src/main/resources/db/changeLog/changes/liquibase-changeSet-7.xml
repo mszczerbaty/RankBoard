@@ -38,5 +38,33 @@
             <column name="category_id" value="6"/>
             <column name="boardgame_id" value="3"/>
         </insert>
+        <insert tableName="boardgames_categories">
+            <column name="category_id" value="2"/>
+            <column name="boardgame_id" value="4"/>
+        </insert>
+        <insert tableName="boardgames_categories">
+            <column name="category_id" value="5"/>
+            <column name="boardgame_id" value="4"/>
+        </insert>
+        <insert tableName="boardgames_categories">
+            <column name="category_id" value="6"/>
+            <column name="boardgame_id" value="4"/>
+        </insert>
+        <insert tableName="boardgames_categories">
+            <column name="category_id" value="7"/>
+            <column name="boardgame_id" value="4"/>
+        </insert>
+        <insert tableName="boardgames_categories">
+            <column name="category_id" value="1"/>
+            <column name="boardgame_id" value="5"/>
+        </insert>
+        <insert tableName="boardgames_categories">
+            <column name="category_id" value="2"/>
+            <column name="boardgame_id" value="5"/>
+        </insert>
+        <insert tableName="boardgames_categories">
+            <column name="category_id" value="5"/>
+            <column name="boardgame_id" value="5"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>
