@@ -25,9 +25,10 @@ import static com.example.demo.Entities.Role.ROLE_USER;
 @Service
 public class UserService implements UserDetailsService {
 
-
+    @Autowired
     private UserRepo userRepo;
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override

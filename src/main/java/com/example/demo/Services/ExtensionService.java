@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class ExtensionService {
 
-    ExtensionRepo extensionRepo;
+    private ExtensionRepo extensionRepo;
 
     public ExtensionService(ExtensionRepo extensionRepo) {
         this.extensionRepo = extensionRepo;
